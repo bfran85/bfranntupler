@@ -174,8 +174,8 @@ Ntupler::analyze(const edm::Event& iEvent, const edm::EventSetup& iSetup){
             ak7jet_pt.push_back( j7.pt() );
         }
 
-        nJets_AK5PF = (int)jet5->size();
-        nJets_AK7PF = (int)jet7->size();
+        nJets_AK5PF = jet5->size();
+        nJets_AK7PF = jet7->size();
         newtree->Fill();
 
         // clear the vectors for next event

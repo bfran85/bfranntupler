@@ -24,6 +24,7 @@
 #include "DataFormats/JetReco/interface/PFJet.h"
 #include "DataFormats/JetReco/interface/PFJetCollection.h"
 #include "DataFormats/PatCandidates/interface/Jet.h"
+#include "DataFormats/BTauReco/interface/JetTag.h"
 #include "FWCore/ServiceRegistry/interface/Service.h"
 #include "CommonTools/UtilAlgos/interface/TFileService.h"
 #include "FWCore/Utilities/interface/InputTag.h"
@@ -39,9 +40,9 @@
 
 using namespace edm;
 using namespace std;
-/////////////////////
+                                                        /////////////////////
                                                         //class declaration//
-////////////////////
+                                                        ////////////////////
 
 class Ntupler : public edm::EDAnalyzer {
         public:
@@ -81,6 +82,7 @@ class Ntupler : public edm::EDAnalyzer {
             edm::InputTag src2_;
             edm::InputTag srcAK7_;
             edm::InputTag srcAK5_;
+            edm::InputTag srcCSVBTag_;
 };
 
 
@@ -90,14 +92,16 @@ Ntupler::Ntupler(const edm::ParameterSet& iConfig) :
         src_( iConfig.getParameter<edm::InputTag>( "src" ) ),                   // Obtain input
         src2_( iConfig.getParameter<edm::InputTag>( "srcGen" ) ),                        // Obtain input
         srcAK7_( iConfig.getParameter<edm::InputTag>("srcAK7") ),
-        srcAK5_( iConfig.getParameter<edm::InputTag>("srcAK5") ) {
+        srcAK5_( iConfig.getParameter<edm::InputTag>("srcAK5") ),
+        srcCSVBTag_( iConfig.getParameter<edm::InputTag>("srcCSVBTag") )
+        {
 
         // Declare new tree
         newtree = fs->make<TTree>("DataSetTree","Analysis Tree for Data Set");
 
         // Create branches for new tree
-// newtree->Branch("nJets_AK5-PF",&nJets_AK5-PF,"nJets_AK5-PF/I");
-// newtree->Branch("nJets_AK7-PF",&nJets_AK7-PF,"nJets_AK7-PF/I");
+//      newtree->Branch("nJets_AK5-PF",&nJets_AK5-PF,"nJets_AK5-PF/I");
+//      newtree->Branch("nJets_AK7-PF",&nJets_AK7-PF,"nJets_AK7-PF/I");
         newtree->Branch("ak5jet_px",&ak5jet_px);
         newtree->Branch("ak5jet_py",&ak5jet_py);
         newtree->Branch("ak5jet_pz",&ak5jet_pz);
@@ -112,10 +116,10 @@ Ntupler::Ntupler(const edm::ParameterSet& iConfig) :
         newtree->Branch("ak7jet_eta",&ak7jet_eta);
         newtree->Branch("ak7jet_phi",&ak7jet_phi);
         newtree->Branch("ak7jet_pt",&ak7jet_pt);
-//      newtree->Branch("ak5jet_CSVbdisc",&ak5jet_CSVbdisc);
-//      newtree->Branch("ak7jet_CSVbdisc",&ak7jet_CSVbdisc);
-// newtree->Branch("ak5jet_DINKObdisc[nJets_AK5-PF]",&ak5jet_DINKObdisc);
-// newtree->Branch("ak7jet_DINKObdisc[nJets_AK7-PF]",&ak7jet_DINKObdisc);
+        newtree->Branch("ak5jet_CSVbdisc",&ak5jet_CSVbdisc);
+        newtree->Branch("ak7jet_CSVbdisc",&ak7jet_CSVbdisc);
+//      newtree->Branch("ak5jet_DINKObdisc[nJets_AK5-PF]",&ak5jet_DINKObdisc);
+//      newtree->Branch("ak7jet_DINKObdisc[nJets_AK7-PF]",&ak7jet_DINKObdisc);
 
 }
 
@@ -151,6 +155,16 @@ Ntupler::analyze(const edm::Event& iEvent, const edm::EventSetup& iSetup){
         // Way to call ak7PFJETS
         edm::Handle<std::vector<reco::PFJet>> jet7;
         iEvent.getByLabel(srcAK7_ , jet7);
+    
+//      edm::Handle<reco::JetTagCollection> bTagHandle;
+//      iEvent.getByLabel(srcCSVBTag_, bTagHandle);
+//      const reco::JetTagCollection & bTags = ( bTagHandle.product() );
+
+//      # Loop over gets and study b tag info.
+//      for (int i = 0, i != bTags.size(), ++i) {
+//          cout<<" Jet "<< i
+//               <<" has b tag discriminator = "<<bTags[i].second
+//               << " and jet Pt = "<<bTags[i].first->pt()<<endl;
 
         for (int iJet = 0; iJet < (int)jet5->size(); iJet++)
         {   reco::PFJet j5 = jet5->at(iJet);
@@ -161,6 +175,7 @@ Ntupler::analyze(const edm::Event& iEvent, const edm::EventSetup& iSetup){
             ak5jet_eta.push_back( j5.eta() );
             ak5jet_phi.push_back( j5.phi() );
             ak5jet_pt.push_back( j5.pt() );
+//          ak5jet_CSVbdisc.push_back( bTags[j5].second );  
         }
 
         for (int iJet = 0; iJet < (int)jet7->size(); iJet++)
@@ -172,6 +187,7 @@ Ntupler::analyze(const edm::Event& iEvent, const edm::EventSetup& iSetup){
             ak7jet_eta.push_back( j7.eta() );
             ak7jet_phi.push_back( j7.phi() );
             ak7jet_pt.push_back( j7.pt() );
+//          ak7jet_CSVbdisc.push_back( bTags[j7].second );
         }
 
         nJets_AK5PF = jet5->size();
@@ -186,6 +202,7 @@ Ntupler::analyze(const edm::Event& iEvent, const edm::EventSetup& iSetup){
         ak5jet_eta.clear();
         ak5jet_phi.clear();
         ak5jet_pt.clear();
+//      ak5jet_CSVbdisc.clear();
 
         ak7jet_px.clear();
         ak7jet_py.clear();
@@ -194,7 +211,7 @@ Ntupler::analyze(const edm::Event& iEvent, const edm::EventSetup& iSetup){
         ak7jet_eta.clear();
         ak7jet_phi.clear();
         ak7jet_pt.clear();
-
+//      ak7jet_CSVbdisc.clear();
 
 }
 

@@ -9,5 +9,3 @@ ntupler_cfg.py  - CMSSW pset
 src/Ntupler.cc - tree code
 
 
-
-All crab jobs fail with exit code 8001

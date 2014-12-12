@@ -93,7 +93,7 @@ Ntupler::Ntupler(const edm::ParameterSet& iConfig) :
         src2_( iConfig.getParameter<edm::InputTag>( "srcGen" ) ),                        // Obtain input
         srcAK7_( iConfig.getParameter<edm::InputTag>("srcAK7") ),
         srcAK5_( iConfig.getParameter<edm::InputTag>("srcAK5") ),
-        srcCSVBTag_( iConfig.getParameter<edm::InputTag>("srcCSVBTag") )
+        srcCSVBTag_( iConfig.getParameter<edm::InputTag>("srcCSVBTag") ),
         {
 
         // Declare new tree

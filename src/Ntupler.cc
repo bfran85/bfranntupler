@@ -175,7 +175,7 @@ Ntupler::analyze(const edm::Event& iEvent, const edm::EventSetup& iSetup){
             ak5jet_eta.push_back( j5.eta() );
             ak5jet_phi.push_back( j5.phi() );
             ak5jet_pt.push_back( j5.pt() );
-//          ak5jet_CSVbdisc.push_back( bTags[j5].second );  
+//          ak5jet_CSVbdisc.push_back( bTags[j5].second );  <-- Needs to correspond to this particular jet
         }
 
         for (int iJet = 0; iJet < (int)jet7->size(); iJet++)
@@ -187,7 +187,7 @@ Ntupler::analyze(const edm::Event& iEvent, const edm::EventSetup& iSetup){
             ak7jet_eta.push_back( j7.eta() );
             ak7jet_phi.push_back( j7.phi() );
             ak7jet_pt.push_back( j7.pt() );
-//          ak7jet_CSVbdisc.push_back( bTags[j7].second );
+//          ak7jet_CSVbdisc.push_back( bTags[j7].second );  <-- Needs to correspond to this particular jet
         }
 
         nJets_AK5PF = jet5->size();

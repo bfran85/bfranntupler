@@ -90,10 +90,10 @@ class Ntupler : public edm::EDAnalyzer {
 ///
 Ntupler::Ntupler(const edm::ParameterSet& iConfig) :
         src_( iConfig.getParameter<edm::InputTag>( "src" ) ),                   // Obtain input
-        src2_( iConfig.getParameter<edm::InputTag>( "srcGen" ) ),                        // Obtain input
+        // src2_( iConfig.getParameter<edm::InputTag>( "srcGen" ) ),                        // Obtain input
         srcAK7_( iConfig.getParameter<edm::InputTag>("srcAK7") ),
         srcAK5_( iConfig.getParameter<edm::InputTag>("srcAK5") ),
-        srcCSVBTag_( iConfig.getParameter<edm::InputTag>("srcCSVBTag") ),
+        srcCSVBTag_( iConfig.getParameter<edm::InputTag>("srcCSVBTag") )
         {
 
         // Declare new tree
@@ -171,7 +171,7 @@ Ntupler::analyze(const edm::Event& iEvent, const edm::EventSetup& iSetup){
             ak5jet_px.push_back( j5.px() );
             ak5jet_py.push_back( j5.py() );
             ak5jet_pz.push_back( j5.pz() );
-            ak5jet_e.push_back( j5.e() );
+            ak5jet_e.push_back( j5.energy() );
             ak5jet_eta.push_back( j5.eta() );
             ak5jet_phi.push_back( j5.phi() );
             ak5jet_pt.push_back( j5.pt() );
@@ -183,7 +183,7 @@ Ntupler::analyze(const edm::Event& iEvent, const edm::EventSetup& iSetup){
             ak7jet_px.push_back( j7.px() );
             ak7jet_py.push_back( j7.py() );
             ak7jet_pz.push_back( j7.pz() );
-            ak7jet_e.push_back( j7.e() );
+            ak7jet_e.push_back( j7.energy() );
             ak7jet_eta.push_back( j7.eta() );
             ak7jet_phi.push_back( j7.phi() );
             ak7jet_pt.push_back( j7.pt() );

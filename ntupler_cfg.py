@@ -32,7 +32,7 @@ process.TFileService = cms.Service("TFileService",
 process.Run2012ANtuple = cms.EDAnalyzer('Ntupler',
         src = cms.InputTag("hltCaloJetIDPassed"),
         srcAK5 = cms.InputTag("ak5PFJets"),
-        srcCA8 = cms.InputTag("ak7PFJets"),
+        srcAK7 = cms.InputTag("ak7PFJets"),
         srcCSVBTag = cms.InputTag("combinedSecondarVertexBJetTags"),
 )
 

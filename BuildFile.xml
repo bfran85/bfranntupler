@@ -7,7 +7,9 @@
 <use name="DataFormats/PatCandidates"/>
 <use name="CondFormats/JetMETObjects"/>
 <use name="JetMETCorrections/Objects"/>
-<use  name="SimDataFormats/PileupSummaryInfo"/>
+<use name="SimDataFormats/PileupSummaryInfo"/>
+<use name="FWCore/ServiceRegistry"/>
+<use name="CommonTools/UtilAlgos"/>
 <use name="root" />
 <export>
    <lib name="1"/>

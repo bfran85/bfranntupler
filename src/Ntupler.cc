@@ -156,9 +156,9 @@ Ntupler::analyze(const edm::Event& iEvent, const edm::EventSetup& iSetup){
         edm::Handle<std::vector<reco::PFJet>> jet7;
         iEvent.getByLabel(srcAK7_ , jet7);
     
-//      edm::Handle<reco::JetTagCollection> bTagHandle;
-//      iEvent.getByLabel(srcCSVBTag_, bTagHandle);
-//      const reco::JetTagCollection & bTags = ( bTagHandle.product() );
+        edm::Handle<reco::JetTagCollection> bTagHandle;
+        iEvent.getByLabel(srcCSVBTag_, bTagHandle);
+        const reco::JetTagCollection & bTags = ( bTagHandle.product() );
 
 //      # Loop over gets and study b tag info.
 //      for (int i = 0, i != bTags.size(), ++i) {

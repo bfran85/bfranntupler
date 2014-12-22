@@ -100,8 +100,8 @@ Ntupler::Ntupler(const edm::ParameterSet& iConfig) :
         newtree = fs->make<TTree>("DataSetTree","Analysis Tree for Data Set");
 
         // Create branches for new tree
-        newtree->Branch("nJets_AK5-PF",&nJets_AK5-PF,"nJets_AK5-PF/I");
-        newtree->Branch("nJets_AK7-PF",&nJets_AK7-PF,"nJets_AK7-PF/I");
+        newtree->Branch("nJets_AK5PF",&nJets_AK5PF,"nJets_AK5PF/I");
+        newtree->Branch("nJets_AK7PF",&nJets_AK7PF,"nJets_AK7PF/I");
         newtree->Branch("ak5jet_px",&ak5jet_px);
         newtree->Branch("ak5jet_py",&ak5jet_py);
         newtree->Branch("ak5jet_pz",&ak5jet_pz);

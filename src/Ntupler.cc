@@ -158,7 +158,7 @@ Ntupler::analyze(const edm::Event& iEvent, const edm::EventSetup& iSetup){
     
         edm::Handle<reco::JetTagCollection> bTagHandle;
         iEvent.getByLabel(srcCSVBTag_, bTagHandle);
-        const reco::JetTagCollection & bTags = ( bTagHandle.product() );
+        const reco::JetTagCollection & bTags = *( bTagHandle.product() );
 
 //      # Loop over gets and study b tag info.
 //      for (int i = 0, i != bTags.size(), ++i) {

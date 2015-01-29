@@ -117,7 +117,7 @@ Ntupler::Ntupler(const edm::ParameterSet& iConfig) :
         newtree->Branch("ak7jet_phi",&ak7jet_phi);
         newtree->Branch("ak7jet_pt",&ak7jet_pt);
         newtree->Branch("ak5jet_CSVbdisc",&ak5jet_CSVbdisc);
-        newtree->Branch("ak7jet_CSVbdisc",&ak7jet_CSVbdisc);
+//      newtree->Branch("ak7jet_CSVbdisc",&ak7jet_CSVbdisc);
 //      newtree->Branch("ak5jet_DINKObdisc[nJets_AK5-PF]",&ak5jet_DINKObdisc);
 //      newtree->Branch("ak7jet_DINKObdisc[nJets_AK7-PF]",&ak7jet_DINKObdisc);
 
@@ -175,7 +175,7 @@ Ntupler::analyze(const edm::Event& iEvent, const edm::EventSetup& iSetup){
             ak5jet_eta.push_back( j5.eta() );
             ak5jet_phi.push_back( j5.phi() );
             ak5jet_pt.push_back( j5.pt() );
-            ak5jet_CSVbdisc.push_back( bTags[j5.index].second );  //<-- Needs to correspond to this particular jet
+            ak5jet_CSVbdisc.push_back( bTags[iJet].second );  
         }
 
         for (int iJet = 0; iJet < (int)jet7->size(); iJet++)
@@ -187,7 +187,7 @@ Ntupler::analyze(const edm::Event& iEvent, const edm::EventSetup& iSetup){
             ak7jet_eta.push_back( j7.eta() );
             ak7jet_phi.push_back( j7.phi() );
             ak7jet_pt.push_back( j7.pt() );
-            ak7jet_CSVbdisc.push_back( bTags[j7.index].second );  //<-- Needs to correspond to this particular jet
+//          Need to calculate ak7 btag info
         }
 
         nJets_AK5PF = jet5->size();
@@ -211,7 +211,7 @@ Ntupler::analyze(const edm::Event& iEvent, const edm::EventSetup& iSetup){
         ak7jet_eta.clear();
         ak7jet_phi.clear();
         ak7jet_pt.clear();
-        ak7jet_CSVbdisc.clear();
+//      ak7jet_CSVbdisc.clear();
 
 }
 

@@ -3,7 +3,7 @@ from FWCore.ParameterSet.VarParsing import VarParsing
 options = VarParsing ('python')
 
 options.register('outfilename',
-                 "Run2012A_HT750_NTuple.root",
+                 "Run2012A_HT750_Ntuple.root",
                  VarParsing.multiplicity.singleton,
                  VarParsing.varType.string,
                  "Name of output file"
@@ -30,10 +30,10 @@ process.TFileService = cms.Service("TFileService",
 )
 
 process.Run2012ANtuple = cms.EDAnalyzer('Ntupler',
-        src = cms.InputTag("hltCaloJetIDPassed"),
+        srcCalo = cms.InputTag("ak5CaloJets"),
         srcAK5 = cms.InputTag("ak5PFJets"),
         srcAK7 = cms.InputTag("ak7PFJets"),
-        srcCSVBTag = cms.InputTag("combinedSecondarVertexBJetTags"),
+        srcCSVBTag = cms.InputTag("combinedSecondaryVertexBJetTags"),
 )
 
 process.p = cms.Path(process.Run2012ANtuple)
